@@ -48,7 +48,6 @@ init_db()
 def get_ai_client(api_key):
     if not api_key:
         return None
-    # Google AI Studio provides a free OpenAI-compatible endpoint!
     return OpenAI(
         api_key=api_key,
         base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
@@ -75,7 +74,7 @@ def analyze_symptoms_and_generate_questions(client, patient_data):
     """
     try:
         response = client.chat.completions.create(
-            model="gemini-2.5-flash",
+            model="gemini-3.7-flash",
             messages=[
                 {"role": "system", "content": "You are a senior physician assisting an OPD practitioner with clinical reasoning."},
                 {"role": "user", "content": prompt}
@@ -114,7 +113,7 @@ def compare_management_plan(client, patient_data, diagnosis, doctor_plan):
     """
     try:
         response = client.chat.completions.create(
-            model="gemini-2.5-flash",
+            model="gemini-3.7-flash",
             messages=[
                 {"role": "system", "content": "You are a clinical pharmacologist auditing prescription accuracy."},
                 {"role": "user", "content": prompt}
@@ -267,4 +266,7 @@ elif menu == "Patient Database & Search":
             with col_r:
                 st.write(f"**Working Diagnosis:** {row[12]}")
                 st.write(f"**Prescribed Plan:** {row[13]}")
-            if row[11]: st.caption
+            if row[11]: st.caption(f"**AI Questions:**\n{row[11]}")
+            if row[14]: st.info(f"**AI Audit:**\n{row[14]}")
+            if row[15] and os.path.exists(row[15]):
+                st.image(Image.open(row[15]), width=400)
