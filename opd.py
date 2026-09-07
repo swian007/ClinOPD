@@ -74,7 +74,7 @@ def analyze_symptoms_and_generate_questions(client, patient_data):
     """
     try:
         response = client.chat.completions.create(
-            model="gemini-3.7-flash",
+            model="gemini-3.8-flash",
             messages=[
                 {"role": "system", "content": "You are a senior physician assisting an OPD practitioner with clinical reasoning."},
                 {"role": "user", "content": prompt}
@@ -113,7 +113,7 @@ def compare_management_plan(client, patient_data, diagnosis, doctor_plan):
     """
     try:
         response = client.chat.completions.create(
-            model="gemini-3.7-flash",
+            model="gemini-3.8-flash",
             messages=[
                 {"role": "system", "content": "You are a clinical pharmacologist auditing prescription accuracy."},
                 {"role": "user", "content": prompt}
