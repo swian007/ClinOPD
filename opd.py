@@ -43,7 +43,7 @@ def init_db():
 init_db()
 
 # ------------------------------------------------------------------------------
-# 2. FREE AI ENGINE (GOOGLE GEMINI VIA OPENAI-COMPATIBLE ENDPOINT)
+# 2. FREE LIGHTNING-FAST AI ENGINE (GEMINI 2.5 FLASH)
 # ------------------------------------------------------------------------------
 def get_ai_client(api_key):
     if not api_key:
@@ -74,7 +74,7 @@ def analyze_symptoms_and_generate_questions(client, patient_data):
     """
     try:
         response = client.chat.completions.create(
-            model="gemini-3.8-flash",
+            model="gemini-2.5-flash",
             messages=[
                 {"role": "system", "content": "You are a senior physician assisting an OPD practitioner with clinical reasoning."},
                 {"role": "user", "content": prompt}
@@ -113,7 +113,7 @@ def compare_management_plan(client, patient_data, diagnosis, doctor_plan):
     """
     try:
         response = client.chat.completions.create(
-            model="gemini-3.8-flash",
+            model="gemini-2.5-flash",
             messages=[
                 {"role": "system", "content": "You are a clinical pharmacologist auditing prescription accuracy."},
                 {"role": "user", "content": prompt}
@@ -140,7 +140,7 @@ menu = st.sidebar.radio("Navigation", ["New Consultation Engine", "Patient Datab
 
 if menu == "New Consultation Engine":
     st.title("Intelligent OPD Consultation Engine (Free Tier)")
-    st.caption("Powered by Google Gemini Free API")
+    st.caption("Powered by Google Gemini 2.5 Flash Engine")
 
     st.markdown("---")
     st.subheader("1. Patient Demographics")
@@ -174,7 +174,7 @@ if menu == "New Consultation Engine":
         elif not ai_client:
             st.error("Please provide your Google API key in the sidebar.")
         else:
-            with st.spinner("Analyzing symptoms..."):
+            with st.spinner("Analyzing symptoms rapidly..."):
                 patient_data = {
                     "age": age, "gender": gender, "address": address,
                     "chief_complaint": chief_complaint, "duration": duration,
